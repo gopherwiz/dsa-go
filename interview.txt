@@ -1,0 +1,150 @@
+----------------------------------- DSA Scaler Module I -----------------------------------
+Array Techniques
+	Factor count ~ TC N^1/2
+	Reverse array L to R ~ swap while l<r with 2 pointers
+	✅ Equilibrium index ~ carry-forward or prefix
+	✅ Max subarray sum in all k length subarrays ~ sliding-window or prefix
+	🟡 Sum of all possible sub-arrays ~ contribution technique
+	✅ Pick from both sides ~ minimise sliding-window or maximise prefix-suffix
+	✅ Return array of elements(product-array/element) ~ prefix on product
+	Start Index of subarray of size k with least avg ~ sliding-window or prefix
+
+Array 1-d
+	✅ Max subarray sum in all subarrays ~ kadane-sum-ans
+	✅ Perform multiple queries on array ~ mark all & then prefix
+	✅ Rain water trapping ~ Sum{min(left_max, right_max) - current_height} with prefix/suffix{heights}
+	✅ Add 1 to vector represented vector ~ reverse & do operations & reverse back
+	✅ Flip a subarray to maximise 1's in a binary array ~ kadane-with-indices
+
+Array 2-d
+	✅ Find k in RC-wise sorted matrix ~ start with top right corner, and go c--/r++
+	✅ Find row with max 1s in binary sorted matrix ~ start with top right corner, and go c--/r++
+	✅ Spiral matrix ~ boundary elements
+	🟡 Sum of all submatrices sum ~ contribution technique with TL,BR
+	✅ Min swaps to club certain items together ~ sliding window with caterpillar-leaf-analogy
+
+Array interviews
+	✅ Merge overlapping intervals ~ non-overlapping condition
+	✅ Insert new interval in non-overlapping list ~ cover all 3 cases
+	✅ First missing positive ~ play with array indices
+	Total number of digit '1' in all numbers <= A ~ find contribution of 1's from each digit-place 
+	✅ Find next greater permutation of array represented number ~ manipulate the decreasing-subsequence at the end
+
+Bit maninpulation 1
+	✅ Concepts ~ XOR properties, set bit(|), check if bit set(&), toggle bit(^)
+	✅ Target Sum from 0 to A ~ count set bits
+	kth Magic number(sum of powers of 5) in sorted list[5, 25, 30, 125, ...] ~ weighted sum for each set bit of k
+	
+Bit maninpulation 2
+	Every number occurs twice except one, find that ~ xor all
+	✅ Every number occurs k times except one, find that ~ check set_bit_ct for each bit across all numbers; if (set_bit_ct % k) != 0, set bit in ans
+	✅ Every number occurs twice except two, find them ~ xor_all; find any set_bit index in xor_all; based on index, split into 2 groups; xor groups
+	✅ Two numbers in [1, N+2] are missing, find them ~ same as previous question; work with xor_twice{xor_all & xor_range[1, N+2]}
+	✅ Max AND pair ~ starting from MSB, check set_bit_ct for each bit across all numbers; if set_bit_ct >= 2, set bit in ans & mark numbers with unset bit as 0
+	🟡 All subarrays OR sum ~ contribution technique with each bit contribution calculations
+			     ~ set_contribution = total - unset_contribution
+	Strange equality for given number A, find its greatest_smaller(X) and smallest_greater(Y) ~ floor(log2(A)) + 1 = n gives number of bits needed to represent A
+											 	  ~ A+B = A^B + 2(A&B) property tells X&A and Y&A needs to be 0
+												  ~ X : iterate bit 0 to n-1 in A and toggle the bits
+												  ~ Y : 1 << n
+	✅ Find pair with min XOR in given array ~ sort the array; ans = minimum(X[i] XOR X[i+1]) for i -> [0, array.size() - 1]
+	🟡 Find the sum of all XOR pairs in given array ~ contribution technique with each bit contribution calculations
+						     ~ bit contributes to XOR result based on differing values at this bit position : set_ct * unset_ct
+Recursion 1
+	Sum
+	✅ Factorial
+	✅ Fibonacci
+	✅ Palindrome
+	✅ Sum of digits
+
+Recursion 2
+	✅ Tower of hanoi ~ args as (disk,from,to,spare, result)
+	✅ Fast power ~ a^n : n==even{half * half} n==odd{half * half * a}
+	✅ Valid parenthesis ~ args as (N,str,open,close, result)
+	✅ Reverse string from middle ~ recursive iteration with swap
+
+Back-tracking
+	✅ Valid parenthesis ~ use back-tracking template
+	✅ Generate all subsets ~ recursive iteration with take-backtrack-donttake
+	✅ Generate all permutations ~ recursive iteration with used array tracking
+	
+Modular arithmetic & GCD
+	Find count of such pairs (i,j) in array A with given m such that (A[i] + A[j])%m == 0 ~ mod array with m & count pairs with freq array
+	Find gcd in O(log A) ~ GCD(a,b) = GCD(b, a%b) until b==0
+	Find the array element to delete so GCD of rest becomes max ~ use prefix & suffix to calculate gcd on left & right quickly in O(N*logA) instead of O(N^2)
+	
+Combinatorics
+	nPr = n! / (n-r)!
+	nCr = n! / (n-r)! * r!
+	Pascals Triangle ~ start-end of any row gets assigned 1 & rest is calculated as sum of above row's prev two
+	Nth column title for Excel ~ [do (-1) to have a base-26 system, then do (%26) & (/26)] keep appending (%26)-char to result until 0 reached - Reverse result
+
+Prime numbers (link)
+	Find primes ~ sieve
+	Find smallest prime factors (spf) ~ sieve variation
+	Count factors ~ use spf array to do quick prime factorization with pow & calculate factors
+	Find in range[1,N] who have 2 distinct prime factors ~ use spf array to do quick prime factorization without pow & check 2 distinct factors
+
+----------------------------------- DSA Scaler Module II -----------------------------------
+OOPS introduction
+	SKIP
+
+OOPS constructor, inheritance & polymorphism
+	SKIP
+
+Hashing 1
+	✅ Find frequency of list of elements in given array ~ HM
+	✅ Count distinct elements in given array ~ HS
+	✅ Find first repeating element in array ~ create HM in first iteration & check for result in second iteration(no iteration on unordered_map)
+	✅ Check if a subarray present with sum 0 ~ PS[j] is 0 or PS[j] is repeated(check with HS)
+
+Hashing 2
+	✅ For some given k, check if any pair exists in array such that Ai + Aj = k ~ keep checking for (k-Ai) in HS & filling HS with Ai on each iteration
+	✅ For some given k, count the number of pairs in array such that Ai + Aj = k ~ keep checking & counting for (k-Ai) in HM & updating HM with Ai on each iteration
+	✅ Check if a subarray is present with sum k in given array ~ PS[j] is k or {PS[j] - k == PS[any]}(check with HS)
+	✅ Find distinct elements in every window of size k in given array ~ sliding window with running HM
+
+Collections
+	SKIP
+
+Count & merge sort
+	✅ Sort array with count_sort ~ using HM for storing freq in first iteration and iterating{min to max} with times print/push
+	✅ Merge two sorted arrays A and B ~ while A[i] && B[j], keep pushing smaller to C[k] & increment i,j,k accordingly
+	✅ Merge Sort ~ recursive left/right merge_sort calls & merge at end - merge takes & modifies actual array by using auxiliary left & right subarray via l,m,r
+	✅ Calculate number of pairs in array A & B such that A[i] > B[j] ~ sort arrays & count optimally(if greater than initial, then greater than rest)
+	✅ Calculate number of pairs in array A only such that A[i] > A[j], i<j ~ Do merge sort & count optimally when left[i] > right[j]
+
+Quick sort & comparator
+	✅ Partition given array A with first element as pivot ~ end pointers keep going to other end until cross while ensuring arranged as per pivot by swap
+	✅ Quick Sort ~ partition index at start & then recursive left/right quick_sort calls - partition takes & modifies actual array with l,r & swaps
+	✅ Custom Comparator ~ from the bool func -> return what you expect the order to be in terms of params v1 & v2
+
+Binary search on array
+	✅ Find index of element in a sorted distinct array ~ BS
+	✅ Find index of first/last occurrence in sorted array ~ BS variation - keep going left/right after finding
+	✅ Every element occurs twice(adjacent) except one, find that ~ BS on parity change of indices - add a check to ensure first occurrence(go left if same)
+	✅ Find peak/minima in increasing/decreasing array ~ compare mid with left/right adjacent & decide - use safeGet to handle corners
+
+Binary search problems
+	✅ Search in a rotated sorted array ~ find peak & split into 2 bs-arrays or region concept
+	✅ Find floor square root of N ~ bs with ans setting left side
+	Find Ath seq number divisible by B and C ~ bs using formula{X/B + X/C + X/lcm(B,C)}
+	✅ Find combined median of two sorted arrays ~ bs on {number of elements to pick from arr1}
+
+Binary search on answer
+	✅ Painters partition problem ~ binary search on bestTime
+	✅ Aggresive cows ~ binary search on bestDistance
+	
+Two pointers
+	TODO
+
+----------------------------------- DSA Scaler Module III -----------------------------------
+
+
+
+
+
+
+
+
+	
